@@ -1,0 +1,36 @@
+{% extends "base.html.jinja" %}
+{% set login="" %}
+{% macro render_field(field) %}
+    {{ field(placeholder=field.label.text, class="form-control", **kwargs)|safe }}
+    {{ field.label }}
+{% endmacro %}
+{% block errors %}
+    {% if errors is defined %}
+        {% for error in errors %}
+            <div class="alert alert-{{ error[0] }} alert-dismissible d-flex fade show"
+                 role="alert">
+                <div>
+                    <strong>{{ _("Holy guacamole!") }}</strong> {{ _(error[1]) }}
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock errors %}
+{% block content %}
+    <form method="post" action="{{ url_for('login') }}">
+        <div class="row justify-content-center">
+            <div class="col-3">
+                {% for field in form %}<div class="form-floating mb-3">{{ render_field(field) }}</div>{% endfor %}
+                <div class="row justify-content-center p-5">
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-success mb-3">{{ _("Log in") }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

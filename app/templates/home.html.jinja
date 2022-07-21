@@ -1,0 +1,89 @@
+{% extends "base.html.jinja" %}
+{% set home = "" %}
+{% block content %}
+    <form method="post" action="{{ url_for('download') }}">
+        <div class="form-floating mb-3">
+            <input type="url"
+                   class="form-control"
+                   id="url"
+                   name="url"
+                   placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                   value="https://www.youtube.com/watch?v=1PxGcu0T0j0"/>
+            <label for="url">Url</label>
+        </div>
+        <div class="row justify-content-center p-5">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success mb-3">{{ _("Download") }}</button>
+            </div>
+        </div>
+    </form>
+    <div class="accordion" id="accordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading_one">
+                <button class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse_one"
+                        aria-expanded="true"
+                        aria-controls="collapse_one">
+                    Downloading
+                </button>
+            </h2>
+            <div id="collapse_one"
+                 class="accordion-collapse collapse show"
+                 aria-labelledby="heading_one">
+                <div class="accordion-body p-1">
+                    <ul class="list-group" id="downloading-list">
+                        <li class="list-group-item" id="downloading-list-header">
+                            <div class="row align-items-center">
+                                <div class="col-6 d-flex align-items-center">
+                                    <input class="form-check-input me-2" type="checkbox" value="" />
+                                    <button class="btn" type="button">
+                                        <i class="bi bi-trash"></i>Cancel selected
+                                    </button>
+                                </div>
+                                <div class="col-3"></div>
+                                <div class="col-1" id="speed-header">
+                                    <strong>Speed</strong>
+                                </div>
+                                <div class="col-1" id="eta-header">
+                                    <strong>ETA</strong>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading_two">
+                <button class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse_two"
+                        aria-expanded="true"
+                        aria-controls="collapse_two">
+                    Downloaded
+                </button>
+            </h2>
+            <div id="collapse_two"
+                 class="accordion-collapse collapse show"
+                 aria-labelledby="heading_two">
+                <div class="accordion-body p-1">
+                    <ul class="list-group" id="downloaded-list">
+                        <li class="list-group-item" id="downloaded-list-header">
+                            <div class="row align-items-center">
+                                <div class="col-6 d-flex align-items-center">
+                                    <input class="form-check-input me-2" type="checkbox" value="" />
+                                    <button class="btn" type="button">
+                                        <i class="bi bi-trash"></i>Delete selected
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
