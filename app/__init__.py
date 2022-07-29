@@ -14,5 +14,5 @@ if True:
 
 
 if __name__ == "__main__":
-    # check if ffmpeg is installed
+    # TODO: check if ffmpeg is installed
     app.run()
