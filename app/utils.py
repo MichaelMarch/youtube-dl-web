@@ -1,5 +1,4 @@
 from json import dumps as to_json_str
-from queue import Queue
 from flask import request, session
 from flask_babel import Babel
 from platform import system
@@ -11,8 +10,6 @@ if not system() == "Windows":
     from simplepam import authenticate as pam_authenticate
 
 babel: Babel = Babel(app)
-# TODO: dict[username, Thread] assign thread to a user
-threads = []
 
 
 def create_sse_message(event_name: str, data: dict) -> str:
@@ -55,11 +52,4 @@ def authenticate(username: str, password: str) -> bool:
 
 def split_filename(filename: str) -> tuple[str, str, str]:
     sep_index: int = filename.find(' ')
-    return (filename[:sep_index], filename[sep_index:], filename[filename.rfind('.') + 1:].lower())
-
-
-def clear_queue(queue: Queue) -> None:
-    with queue.mutex:
-        queue.queue.clear()
-        queue.all_tasks_done.notify_all()
-        queue.unfinished_tasks = 0
+    return (filename[:sep_index], filename[sep_index + 1:], filename[filename.rfind('.') + 1:].lower())
